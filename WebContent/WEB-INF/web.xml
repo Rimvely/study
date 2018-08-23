@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>study</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+  	<servlet-name>HelloServlet</servlet-name>
+  	<servlet-class>com.svt.Test1</servlet-class>
+  </servlet>
+  
+  
+  <servlet-mapping>
+  	<servlet-name>HelloServlet</servlet-name>
+  	<url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 1.ServletConfig 인터페이스 -->
+  <!-- 해당 서블릿에서만 사용가능 -->
+  <servlet>
+  	<servlet-name>test2Servlet</servlet-name>
+  	<servlet-class>com.svt.Test2</servlet-class>
+  		<init-param>
+  			<param-name>name</param-name>
+  			<param-value>배수지</param-value>
+  		</init-param>
+  		<init-param>
+  			<param-name>age</param-name>
+  			<param-value>25</param-value>
+  		</init-param>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>test2Servlet</servlet-name>
+  	<url-pattern>/itwill2</url-pattern>
+  </servlet-mapping>
+  
+  
+  <!-- 1.ServletContext 인터페이스 -->
+  <!-- 동일 웹어플리케이션내 모든 서블릿(is 클래스) && (JSP)에서 사용가능 -->
+  <context-param>
+  	<param-name>gender</param-name>
+  	<param-value>여자</param-value>
+  </context-param>
+  
+  
+  <!-- Test3.jsp 에서 Test3.java 연결통로 -->
+  
+  <servlet>
+  	<servlet-name>test3Servlet</servlet-name>
+  	<servlet-class>com.svt.Test3</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>test3Servlet</servlet-name>
+  	<url-pattern>/ss1</url-pattern>
+  </servlet-mapping>
+
+  <!-- DBCP  -->
+  <resource-ref>
+  	<description>Oracle DataSource</description>
+  	<res-ref-name>jdbc/myOracle</res-ref-name>
+  	<res-type>javax.sql.DataSource</res-type>
+  	<res-auth>Container</res-auth>
+  </resource-ref>
+  
+  <!-- Servlet 게시판  -->
+  <servlet>
+  	<servlet-name>boardServlet</servlet-name>
+  	<servlet-class>com.board.BoardServlet</servlet-class>
+  </servlet>
+
+<servlet-mapping>
+	<servlet-name>boardServlet</servlet-name>
+	<url-pattern>/sboard/*</url-pattern>
+</servlet-mapping>
+
+<!-- Score 게시판  -->
+  <servlet>
+  	<servlet-name>scoreServlet</servlet-name>
+  	<servlet-class>com.score.ScoreServlet</servlet-class>
+  </servlet>
+
+<servlet-mapping>
+	<servlet-name>scoreServlet</servlet-name>
+	<url-pattern>/sscore/*</url-pattern>
+</servlet-mapping>
+
+<!-- 회원 가입 Servlet  -->
+  <servlet>
+  	<servlet-name>memberServlet</servlet-name>
+  	<servlet-class>com.join.MemberServlet</servlet-class>
+  </servlet>
+
+<servlet-mapping>
+	<servlet-name>memberServlet</servlet-name>
+	<url-pattern>/join/*</url-pattern>
+</servlet-mapping>
+
+<!-- 파일 업로드 Servlet  -->
+  <servlet>
+  	<servlet-name>fileTestServlet</servlet-name>
+  	<servlet-class>com.fileTest.FileTestServlet</servlet-class>
+  </servlet>
+
+<servlet-mapping>
+	<servlet-name>fileTestServlet</servlet-name>
+	<url-pattern>/file/*</url-pattern>
+</servlet-mapping>
+
+<!--서블릿 이미지 업로드 셋팅 -->
+  <servlet>
+ 	<servlet-name>imageServlet</servlet-name>
+  	<servlet-class>com.imageTest.ImageTestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>imageServlet</servlet-name>
+  	<url-pattern>/image/*</url-pattern>
+  </servlet-mapping>
+
+<!-- 타이머 필터 셋팅 -->
+<filter>
+	<filter-name>timerFilter</filter-name>
+	<filter-class>com.filter.TimerFilter</filter-class>
+</filter>
+ <filter-mapping>
+<filter-name>timerFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+</filter-mapping>
+
+<!-- charset 필터 셋팅 -->
+<filter>
+	<filter-name>charsetFilter</filter-name>
+	<filter-class>com.filter.CharsetFilter</filter-class>
+	<init-param>
+		<param-name>charset</param-name>
+		<param-value>utf-8</param-value>
+	</init-param>
+</filter>
+
+ <filter-mapping>
+<filter-name>charsetFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+</filter-mapping>
+
+<!-- 로그인 필터 셋팅 -->
+<filter>
+	<filter-name>loginFilter</filter-name>
+	<filter-class>com.filter.LoginFilter</filter-class>
+</filter>
+ <filter-mapping>
+<filter-name>loginFilter</filter-name>
+  	<url-pattern>/sboard/*</url-pattern>
+</filter-mapping>
+
+<!-- 리스너 -->
+
+<listener>
+	<listener-class>com.event.CountManager</listener-class>
+</listener>
+
+<listener>
+	<listener-class>com.event.ContextListenerTest</listener-class>
+</listener>
+
+  
+</web-app>
